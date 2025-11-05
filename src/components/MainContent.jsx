@@ -6,98 +6,96 @@ import {
   Typography,
   Box,
   Button,
-  IconButton,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
 import StatCard from "./StatCard";
 import RecentTable from "./RecentTable";
 import Sparkline from "./Sparkline";
 
-export default function MainContent({ isDesktop, onToggleSidebar }) {
+export default function MainContent({ isDesktop }) {
   return (
     <Container
       maxWidth="xl"
       sx={{
         py: 4,
-        px: { xs: 2, md: 4 },
+        px: { xs: 1, sm: 2, md: 4 },
         display: "flex",
         flexDirection: "column",
+        alignItems: "center", // center grid contents on mobile
         gap: 4,
       }}
     >
-      {/* ===== TOP BAR (no Amber Bank text) ===== */}
-      <Box
+      {/* ===== OVERVIEW SECTION ===== */}
+      <Grid
+        container
+        spacing={3}
+        justifyContent="center"
         sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          mb: 2,
-          flexWrap: "wrap",
-          gap: 2,
+          width: { xs: "95%", sm: "95%", md: "100%" },
+          alignItems: "stretch",
         }}
       >
-        {/* Hamburger icon for all views */}
-        <IconButton
-          onClick={onToggleSidebar}
-          sx={{
-            color: "#00224D",
-            bgcolor: "rgba(0,0,0,0.04)",
-            "&:hover": { bgcolor: "rgba(0,0,0,0.08)" },
-            display: "flex",
-          }}
-        >
-          <MenuIcon />
-        </IconButton>
-
-        {/* Action Button */}
-        <Button
-          variant="contained"
-          sx={{
-            bgcolor: "primary.main",
-            fontWeight: 600,
-            px: 3,
-            py: 1.2,
-            borderRadius: 2,
-            boxShadow: "0 6px 18px rgba(255,32,78,0.25)",
-            "&:hover": {
-              bgcolor: "#A0153E",
-              transform: "translateY(-2px)",
-              boxShadow: "0 8px 24px rgba(160,21,62,0.35)",
-            },
-          }}
-        >
-          New Transfer
-        </Button>
-      </Box>
-
-      {/* ===== MAIN DASHBOARD ===== */}
-      <Grid container spacing={3}>
-        {/* Overview */}
+        {/* Overview + Performance */}
         <Grid item xs={12} md={8}>
           <Paper
             sx={{
               bgcolor: "background.paper",
-              p: 3,
+              p: { xs: 2.5, md: 3 },
               borderRadius: 3,
               boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
               display: "flex",
               flexDirection: "column",
               height: "100%",
+              width: "100%",
             }}
           >
-            <Typography
-              variant="h6"
+            {/* Header */}
+            <Box
               sx={{
-                fontWeight: 700,
-                color: "#00224D",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
                 mb: 3,
+                flexWrap: "wrap",
+                gap: 2,
               }}
             >
-              Overview
-            </Typography>
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: 700,
+                  color: "#00224D",
+                }}
+              >
+                Overview
+              </Typography>
+              <Button
+                variant="contained"
+                sx={{
+                  bgcolor: "#FF204E",
+                  fontWeight: 600,
+                  px: 3,
+                  py: 1.2,
+                  borderRadius: 2,
+                  boxShadow: "0 6px 18px rgba(255,32,78,0.25)",
+                  "&:hover": {
+                    bgcolor: "#A0153E",
+                    transform: "translateY(-2px)",
+                    boxShadow: "0 8px 24px rgba(160,21,62,0.35)",
+                  },
+                }}
+              >
+                New Transfer
+              </Button>
+            </Box>
 
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6} md={4}>
+            {/* Stat cards — each 95% width on mobile */}
+            <Grid
+              container
+              spacing={2}
+              justifyContent="center"
+              sx={{ width: "100%" }}
+            >
+              <Grid item xs={12} sm={10} md={4}>
                 <StatCard
                   title="Balance"
                   value="₦254,300.00"
@@ -105,7 +103,7 @@ export default function MainContent({ isDesktop, onToggleSidebar }) {
                   trend="+4.2%"
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={10} md={4}>
                 <StatCard
                   title="Transactions"
                   value="72"
@@ -113,7 +111,7 @@ export default function MainContent({ isDesktop, onToggleSidebar }) {
                   trend="-1.4%"
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={10} md={4}>
                 <StatCard
                   title="Cards"
                   value="2"
@@ -123,58 +121,39 @@ export default function MainContent({ isDesktop, onToggleSidebar }) {
               </Grid>
             </Grid>
 
-            {/* Realistic Performance Chart */}
-            <Box sx={{ mt: 4 }}>
+            {/* Performance section */}
+            <Box sx={{ mt: 4, width: "100%" }}>
               <Typography
                 variant="subtitle1"
                 sx={{
-                  mb: 2,
+                  mb: 1.5,
                   fontWeight: 700,
                   color: "#00224D",
+                  ml: { xs: 1, md: 0 },
                 }}
               >
                 Performance
               </Typography>
               <Paper
                 sx={{
-                  p: 2.5,
+                  p: 2,
                   borderRadius: 2,
-                  bgcolor: "#FFFFFF",
+                  bgcolor: "#F8F9FB",
                   display: "flex",
-                  flexDirection: "column",
-                  gap: 2,
-                  boxShadow: "0 6px 20px rgba(0,0,0,0.05)",
+                  alignItems: "center",
+                  flexWrap: "wrap",
+                  gap: 3,
+                  width: { xs: "95%", sm: "95%", md: "100%" },
+                  mx: "auto",
                 }}
               >
-                <Box
-                  sx={{
-                    height: 220,
-                    width: "100%",
-                    position: "relative",
-                  }}
-                >
-                  <Sparkline
-                    color="#FF204E"
-                    background="#FFF"
-                    showGrid
-                    showPoints
-                    thickness={2.5}
-                  />
+                <Box sx={{ flex: 1, minWidth: 200 }}>
+                  <Sparkline />
                 </Box>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    alignItems: "center",
-                  }}
-                >
+                <Box sx={{ textAlign: "right", minWidth: 160 }}>
                   <Typography
                     variant="h6"
-                    sx={{
-                      fontWeight: 800,
-                      color: "#FF204E",
-                      mr: 1,
-                    }}
+                    sx={{ fontWeight: 800, color: "#FF204E" }}
                   >
                     ₦14,200
                   </Typography>
@@ -190,8 +169,13 @@ export default function MainContent({ isDesktop, onToggleSidebar }) {
           </Paper>
         </Grid>
 
-        {/* Quick Actions */}
-        <Grid item xs={12} md={4}>
+        {/* ===== QUICK ACTIONS ===== */}
+        <Grid
+          item
+          xs={12}
+          md={4}
+          sx={{ display: "flex", justifyContent: "center" }}
+        >
           <Paper
             sx={{
               bgcolor: "background.paper",
@@ -199,6 +183,7 @@ export default function MainContent({ isDesktop, onToggleSidebar }) {
               borderRadius: 3,
               boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
               height: "100%",
+              width: { xs: "95%", sm: "95%", md: "100%" },
             }}
           >
             <Typography
@@ -208,7 +193,13 @@ export default function MainContent({ isDesktop, onToggleSidebar }) {
               Quick Actions
             </Typography>
 
-            <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 2,
+              }}
+            >
               <Button
                 fullWidth
                 variant="contained"
@@ -260,8 +251,13 @@ export default function MainContent({ isDesktop, onToggleSidebar }) {
         </Grid>
       </Grid>
 
-      {/* Recent Activity */}
-      <Box sx={{ mt: 3 }}>
+      {/* ===== RECENT ACTIVITY ===== */}
+      <Box
+        sx={{
+          mt: 3,
+          width: { xs: "95%", sm: "95%", md: "100%" },
+        }}
+      >
         <RecentTable />
       </Box>
     </Container>
