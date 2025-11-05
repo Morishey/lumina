@@ -9,7 +9,11 @@ export default function Dashboard() {
   const [openSidebar, setOpenSidebar] = useState(false);
 
   const handleSidebarToggle = () => {
-    setOpenSidebar(!openSidebar);
+    setOpenSidebar((s) => !s);
+  };
+
+  const handleSidebarClose = () => {
+    setOpenSidebar(false);
   };
 
   return (
@@ -21,64 +25,45 @@ export default function Dashboard() {
         bgcolor: "background.default",
       }}
     >
-      {/* ====== SIDEBAR (desktop and mobile) ====== */}
-      {isDesktop ? (
-        // Permanent sidebar on desktop
+      {/* Desktop: permanent sidebar */}
+      {isDesktop && (
         <Box
           sx={{
             width: 260,
             flexShrink: 0,
-            borderRight: "1px solid rgba(0,0,0,0.08)",
+            borderRight: "1px solid rgba(0,0,0,0.06)",
             bgcolor: "background.paper",
           }}
         >
           <SideNav />
         </Box>
-      ) : (
-        // Drawer (slide-in menu) for mobile/tablet
+      )}
+
+      {/* Mobile: drawer */}
+      {!isDesktop && (
         <Drawer
           anchor="left"
           open={openSidebar}
-          onClose={handleSidebarToggle}
-          ModalProps={{
-            keepMounted: true,
-          }}
+          onClose={handleSidebarClose}
+          ModalProps={{ keepMounted: true }}
           sx={{
             "& .MuiDrawer-paper": {
-              width: 240,
+              width: 260,
               bgcolor: "background.paper",
-              boxShadow: "0 8px 24px rgba(0,0,0,0.2)",
+              boxShadow: "0 10px 40px rgba(0,0,0,0.12)",
             },
           }}
         >
-          <SideNav onClose={handleSidebarToggle} />
+          {/* pass onClose so SideNav can show a close button inside the drawer */}
+          <SideNav onClose={handleSidebarClose} />
         </Drawer>
       )}
 
-      {/* ====== MAIN CONTENT AREA ====== */}
-      <Box
-        sx={{
-          flex: 1,
-          display: "flex",
-          flexDirection: "column",
-          minWidth: 0,
-        }}
-      >
-        {/* Optional: keep TopBar if needed */}
-        <TopBar />
-
-        <Box
-          sx={{
-            flex: 1,
-            overflowY: "auto",
-            px: { xs: 2, sm: 3, md: 5 },
-            pb: 4,
-          }}
-        >
-          <MainContent
-            isDesktop={isDesktop}
-            onToggleSidebar={handleSidebarToggle}
-          />
+      {/* Main area */}
+      <Box sx={{ flex: 1, display: "flex", flexDirection: "column", minWidth: 0 }}>
+        <TopBar onToggleSidebar={handleSidebarToggle} />
+        <Box sx={{ flex: 1, overflowY: "auto", px: { xs: 2, sm: 3, md: 5 }, pb: 4 }}>
+          <MainContent isDesktop={isDesktop} />
         </Box>
       </Box>
     </Box>
