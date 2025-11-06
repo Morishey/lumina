@@ -1,27 +1,91 @@
 import React from "react";
-import { Paper, Typography, Box } from "@mui/material";
+import { Paper, Box, Typography } from "@mui/material";
+import TrendingUpIcon from "@mui/icons-material/TrendingUp";
+import TrendingDownIcon from "@mui/icons-material/TrendingDown";
 
 export default function StatCard({ title, value, subtitle, trend }) {
+  const isPositive = trend?.includes("+");
+
   return (
-    <Paper sx={{
-      p: 2.2,
-      borderRadius: 2,
-      bgcolor: "rgba(255,255,255,0.03)",
-      transition: "transform 250ms ease, box-shadow 250ms ease",
-      "&:hover": {
-        transform: "translateY(-6px)",
-        boxShadow: "0 20px 50px rgba(255,32,78,0.18), inset 0 -6px 20px rgba(160,20,62,0.04)"
-      }
-    }}>
-      <Typography variant="caption" sx={{ color: "text.secondary" }}>{title}</Typography>
-      <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", mt: 1 }}>
-        <Box>
-          <Typography variant="h6" sx={{ fontWeight: 800 }}>{value}</Typography>
-          <Typography variant="caption" sx={{ color: "text.secondary" }}>{subtitle}</Typography>
-        </Box>
-        <Box>
-          <Typography variant="subtitle2" sx={{ color: "primary.main", fontWeight: 700 }}>{trend}</Typography>
-        </Box>
+    <Paper
+      elevation={0}
+      sx={{
+        p: { xs: 2, sm: 2.5 },
+        borderRadius: { xs: 2, sm: 3 },
+        bgcolor: "#FFFFFF",
+        boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
+        transition: "all 0.3s ease",
+        width: "100%",
+        height: "100%",
+        "&:hover": {
+          transform: "translateY(-4px)",
+          boxShadow: "0 8px 24px rgba(255,32,78,0.12)",
+        },
+      }}
+    >
+      <Typography
+        variant="subtitle2"
+        sx={{
+          color: "#5D0E41",
+          fontWeight: 600,
+          mb: 0.5,
+          textTransform: "uppercase",
+          letterSpacing: 0.4,
+          fontSize: { xs: "0.75rem", sm: "0.8rem" },
+        }}
+      >
+        {title}
+      </Typography>
+
+      <Typography
+        variant="h5"
+        sx={{
+          fontWeight: 800,
+          color: "#00224D",
+          mb: 0.5,
+          fontSize: { xs: "1.1rem", sm: "1.3rem" },
+          wordBreak: "break-word",
+        }}
+      >
+        {value}
+      </Typography>
+
+      <Typography
+        variant="body2"
+        sx={{
+          color: "#5D0E41",
+          opacity: 0.8,
+          mb: 1,
+          fontSize: { xs: "0.75rem", sm: "0.85rem" },
+        }}
+      >
+        {subtitle}
+      </Typography>
+
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          gap: 0.6,
+          color: isPositive ? "#00B894" : "#FF204E",
+          fontWeight: 600,
+        }}
+      >
+        {isPositive ? (
+          <TrendingUpIcon sx={{ fontSize: { xs: 16, sm: 18 } }} />
+        ) : (
+          <TrendingDownIcon sx={{ fontSize: { xs: 16, sm: 18 } }} />
+        )}
+        <Typography
+          variant="body2"
+          sx={{
+            fontWeight: 600,
+            color: isPositive ? "#00B894" : "#FF204E",
+            fontSize: { xs: "0.75rem", sm: "0.85rem" },
+          }}
+        >
+          {trend}
+        </Typography>
       </Box>
     </Paper>
   );

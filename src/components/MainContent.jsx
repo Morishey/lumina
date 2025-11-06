@@ -15,13 +15,16 @@ export default function MainContent({ isDesktop }) {
   return (
     <Container
       maxWidth="xl"
+      disableGutters
       sx={{
-        py: 4,
-        px: { xs: 1, sm: 2, md: 4 },
+        py: { xs: 2, md: 4 },
         display: "flex",
         flexDirection: "column",
-        alignItems: "center", // center grid contents on mobile
-        gap: 4,
+        alignItems: "center",
+        gap: { xs: 3, md: 4 },
+        width: "100%",
+        overflowX: "hidden",
+        "& *": { fontSize: { xs: "0.8rem", md: "0.9rem" } },
       }}
     >
       {/* ===== OVERVIEW SECTION ===== */}
@@ -30,8 +33,9 @@ export default function MainContent({ isDesktop }) {
         spacing={3}
         justifyContent="center"
         sx={{
-          width: { xs: "95%", sm: "95%", md: "100%" },
+          width: "100%",
           alignItems: "stretch",
+          m: 0,
         }}
       >
         {/* Overview + Performance */}
@@ -88,37 +92,54 @@ export default function MainContent({ isDesktop }) {
               </Button>
             </Box>
 
-            {/* Stat cards — each 95% width on mobile */}
+            {/* Stat cards - Stack on mobile */}
             <Grid
               container
               spacing={2}
-              justifyContent="center"
-              sx={{ width: "100%" }}
+              sx={{
+                flexDirection: { xs: "column", sm: "column", md: "row" },
+              }}
             >
-              <Grid item xs={12} sm={10} md={4}>
-                <StatCard
-                  title="Balance"
-                  value="₦254,300.00"
-                  subtitle="Available balance"
-                  trend="+4.2%"
-                />
-              </Grid>
-              <Grid item xs={12} sm={10} md={4}>
-                <StatCard
-                  title="Transactions"
-                  value="72"
-                  subtitle="This month"
-                  trend="-1.4%"
-                />
-              </Grid>
-              <Grid item xs={12} sm={10} md={4}>
-                <StatCard
-                  title="Cards"
-                  value="2"
-                  subtitle="Active cards"
-                  trend="+0.8%"
-                />
-              </Grid>
+              {[
+                {
+                  title: "Balance",
+                  value: "₦254,300.00",
+                  subtitle: "Available balance",
+                  trend: "+4.2%",
+                },
+                {
+                  title: "Transactions",
+                  value: "72",
+                  subtitle: "This month",
+                  trend: "-1.4%",
+                },
+                {
+                  title: "Cards",
+                  value: "2",
+                  subtitle: "Active cards",
+                  trend: "+0.8%",
+                },
+              ].map((card, index) => (
+                <Grid
+                  key={index}
+                  item
+                  xs={12}
+                  md={4}
+                  sx={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: { xs: "100%", sm: "100%", md: "100%" },
+                    }}
+                  >
+                    <StatCard {...card} />
+                  </Box>
+                </Grid>
+              ))}
             </Grid>
 
             {/* Performance section */}
@@ -143,7 +164,7 @@ export default function MainContent({ isDesktop }) {
                   alignItems: "center",
                   flexWrap: "wrap",
                   gap: 3,
-                  width: { xs: "95%", sm: "95%", md: "100%" },
+                  width: "100%",
                   mx: "auto",
                 }}
               >
@@ -170,12 +191,7 @@ export default function MainContent({ isDesktop }) {
         </Grid>
 
         {/* ===== QUICK ACTIONS ===== */}
-        <Grid
-          item
-          xs={12}
-          md={4}
-          sx={{ display: "flex", justifyContent: "center" }}
-        >
+        <Grid item xs={12} md={4}>
           <Paper
             sx={{
               bgcolor: "background.paper",
@@ -183,7 +199,7 @@ export default function MainContent({ isDesktop }) {
               borderRadius: 3,
               boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
               height: "100%",
-              width: { xs: "95%", sm: "95%", md: "100%" },
+              width: "100%",
             }}
           >
             <Typography
@@ -255,10 +271,41 @@ export default function MainContent({ isDesktop }) {
       <Box
         sx={{
           mt: 3,
-          width: { xs: "95%", sm: "95%", md: "100%" },
+          width: "100%",
         }}
       >
-        <RecentTable />
+        <Paper
+          sx={{
+            width: "100%",
+            borderRadius: 3,
+            boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
+            overflow: "hidden",
+            bgcolor: "#F9FAFB",
+            p: { xs: 2, md: 3 },
+          }}
+        >
+          <Typography
+            variant="h6"
+            sx={{
+              mb: 2,
+              fontWeight: 700,
+              color: "#00224D",
+              textAlign: "left",
+            }}
+          >
+            Recent Transactions
+          </Typography>
+          <Box
+            sx={{
+              border: "1px solid rgba(0,0,0,0.08)",
+              borderRadius: 2,
+              overflow: "hidden",
+              bgcolor: "#fff",
+            }}
+          >
+            <RecentTable />
+          </Box>
+        </Paper>
       </Box>
     </Container>
   );

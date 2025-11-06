@@ -1,44 +1,109 @@
 import React from "react";
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Box } from "@mui/material";
+import { Paper, Box, Typography, Avatar, Divider } from "@mui/material";
+import {
+  ArrowDownward,
+  ArrowUpward,
+  ShoppingCart,
+  AccountBalance,
+  LocalAtm,
+  Restaurant,
+  PhoneAndroid,
+  Wifi,
+  DirectionsCar,
+} from "@mui/icons-material";
 
-const rows = [
-  { id: 1, desc: "Salary (Acme)", amount: "+₦120,000", date: "2025-10-29" },
-  { id: 2, desc: "Electricity bill", amount: "-₦8,200", date: "2025-10-28" },
-  { id: 3, desc: "Groceries", amount: "-₦4,900", date: "2025-10-26" },
-  { id: 4, desc: "Transfer to Mary", amount: "-₦10,000", date: "2025-10-24" },
+const transactions = [
+  { id: 1, name: "Transfer to John Doe", date: "Today, 2:45 PM", amount: "-₦12,500.00", type: "debit", icon: <ArrowUpward sx={{ color: "#FF204E" }} /> },
+  { id: 2, name: "Received from Jane Smith", date: "Yesterday, 8:12 PM", amount: "+₦28,000.00", type: "credit", icon: <ArrowDownward sx={{ color: "#00B894" }} /> },
+  { id: 3, name: "Airtime Purchase", date: "Nov 5, 10:30 AM", amount: "-₦2,000.00", type: "debit", icon: <PhoneAndroid sx={{ color: "#5D0E41" }} /> },
+  { id: 4, name: "Deposit from Bank", date: "Nov 4, 1:05 PM", amount: "+₦50,000.00", type: "credit", icon: <AccountBalance sx={{ color: "#00224D" }} /> },
+  { id: 5, name: "Supermarket Purchase", date: "Nov 3, 4:20 PM", amount: "-₦8,700.00", type: "debit", icon: <ShoppingCart sx={{ color: "#A0153E" }} /> },
+  { id: 6, name: "Fuel Payment", date: "Nov 3, 9:00 AM", amount: "-₦6,300.00", type: "debit", icon: <DirectionsCar sx={{ color: "#5D0E41" }} /> },
+  { id: 7, name: "Internet Subscription", date: "Nov 2, 11:12 PM", amount: "-₦4,000.00", type: "debit", icon: <Wifi sx={{ color: "#A0153E" }} /> },
+  { id: 8, name: "Restaurant", date: "Nov 2, 7:20 PM", amount: "-₦5,500.00", type: "debit", icon: <Restaurant sx={{ color: "#FF204E" }} /> },
+  { id: 9, name: "Salary Credit", date: "Nov 1, 8:00 AM", amount: "+₦120,000.00", type: "credit", icon: <LocalAtm sx={{ color: "#00B894" }} /> },
+  { id: 10, name: "Utility Bill", date: "Oct 31, 6:50 PM", amount: "-₦10,000.00", type: "debit", icon: <AccountBalance sx={{ color: "#5D0E41" }} /> },
 ];
 
 export default function RecentTable() {
   return (
-    <Paper sx={{ mt: 2, p: 2, borderRadius: 2, bgcolor: "background.paper" }}>
-      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
-        <Typography variant="h6" sx={{ fontWeight: 700 }}>Recent Activity</Typography>
-        <Typography variant="caption" sx={{ color: "text.secondary" }}>Showing last 4 transactions</Typography>
-      </Box>
+    <Paper
+      elevation={0}
+      sx={{
+        borderRadius: 3,
+        bgcolor: "#fff",
+        overflow: "visible", // ✅ prevent inner scroll
+      }}
+    >
+      {transactions.map((tx, index) => (
+        <React.Fragment key={tx.id}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              px: { xs: 2, sm: 3 },
+              py: { xs: 1.5, sm: 2 },
+              "&:hover": {
+                bgcolor: "rgba(0,0,0,0.02)",
+                transition: "0.25s ease",
+              },
+            }}
+          >
+            {/* Left: Icon + Details */}
+            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+              <Avatar
+                sx={{
+                  bgcolor: "rgba(255,32,78,0.08)",
+                  color: "#FF204E",
+                  width: 42,
+                  height: 42,
+                }}
+              >
+                {tx.icon}
+              </Avatar>
+              <Box>
+                <Typography
+                  variant="subtitle2"
+                  sx={{
+                    fontWeight: 700,
+                    color: "#00224D",
+                    lineHeight: 1.2,
+                  }}
+                >
+                  {tx.name}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: "#5D0E41",
+                    opacity: 0.8,
+                    fontSize: "0.8rem",
+                  }}
+                >
+                  {tx.date}
+                </Typography>
+              </Box>
+            </Box>
 
-      <TableContainer>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell sx={{ color: "text.secondary", borderBottom: "none" }}>Description</TableCell>
-              <TableCell sx={{ color: "text.secondary", borderBottom: "none" }}>Amount</TableCell>
-              <TableCell sx={{ color: "text.secondary", borderBottom: "none" }}>Date</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((r) => (
-              <TableRow key={r.id} sx={{
-                "&:hover": { bgcolor: "rgba(255,32,78,0.04)", transform: "translateY(-2px)" },
-                transition: "all 200ms ease"
-              }}>
-                <TableCell sx={{ color: "white", borderBottom: "none" }}>{r.desc}</TableCell>
-                <TableCell sx={{ color: r.amount.startsWith("+") ? "primary.main" : "text.primary", borderBottom: "none" }}>{r.amount}</TableCell>
-                <TableCell sx={{ color: "text.secondary", borderBottom: "none" }}>{r.date}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            {/* Right: Amount */}
+            <Typography
+              variant="subtitle1"
+              sx={{
+                fontWeight: 700,
+                color: tx.type === "credit" ? "#00B894" : "#FF204E",
+              }}
+            >
+              {tx.amount}
+            </Typography>
+          </Box>
+
+          {/* Divider */}
+          {index < transactions.length - 1 && (
+            <Divider sx={{ mx: 2, bgcolor: "rgba(0,0,0,0.06)" }} />
+          )}
+        </React.Fragment>
+      ))}
     </Paper>
   );
 }

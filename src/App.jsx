@@ -13,17 +13,14 @@ const theme = createTheme({
     },
     text: { primary: "#FFFFFF", secondary: "rgba(255,255,255,0.75)" },
   },
-  typography: { fontFamily: "Inter, Poppins, Arial, sans-serif" },
-  components: {
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          textTransform: "none",
-          borderRadius: 12,
-          transition: "all 250ms ease",
-        },
-      },
-    },
+   typography: {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: 9, // Default base font size (was 14 by default)
+    h6: { fontSize: "0.9rem", fontWeight: 700 },
+    subtitle1: { fontSize: "0.8rem" },
+    body1: { fontSize: "0.8rem" },
+    body2: { fontSize: "0.75rem" },
+    button: { textTransform: "none", fontSize: "0.75rem", fontWeight: 600 },
   },
 });
 
