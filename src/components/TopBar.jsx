@@ -1,5 +1,12 @@
 import React from "react";
-import { AppBar, Toolbar, Box, IconButton, InputBase, Avatar } from "@mui/material";
+import {
+  AppBar,
+  Toolbar,
+  Box,
+  IconButton,
+  InputBase,
+  Avatar,
+} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -33,7 +40,7 @@ export default function TopBar({ onToggleSidebar }) {
 
           <Box sx={{ fontWeight: 700, color: "primary.main", fontSize: 18 }}>
             {/* logo text - change as needed */}
-            Amber Bank
+            Lumina{" "}
           </Box>
         </Box>
 
@@ -64,7 +71,9 @@ export default function TopBar({ onToggleSidebar }) {
           <IconButton sx={{ color: "text.primary" }}>
             <NotificationsIcon />
           </IconButton>
-          <Avatar sx={{ bgcolor: "primary.main", width: 40, height: 40 }}>JD</Avatar>
+          <Avatar sx={{ bgcolor: "primary.main", width: 40, height: 40 }}>
+            JD
+          </Avatar>
         </Box>
       </Toolbar>
     </AppBar>

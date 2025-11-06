@@ -13,16 +13,14 @@ import {
 } from "@mui/icons-material";
 
 const transactions = [
-  { id: 1, name: "Transfer to John Doe", date: "Today, 2:45 PM", amount: "-₦12,500.00", type: "debit", icon: <ArrowUpward sx={{ color: "#FF204E" }} /> },
-  { id: 2, name: "Received from Jane Smith", date: "Yesterday, 8:12 PM", amount: "+₦28,000.00", type: "credit", icon: <ArrowDownward sx={{ color: "#00B894" }} /> },
-  { id: 3, name: "Airtime Purchase", date: "Nov 5, 10:30 AM", amount: "-₦2,000.00", type: "debit", icon: <PhoneAndroid sx={{ color: "#5D0E41" }} /> },
-  { id: 4, name: "Deposit from Bank", date: "Nov 4, 1:05 PM", amount: "+₦50,000.00", type: "credit", icon: <AccountBalance sx={{ color: "#00224D" }} /> },
-  { id: 5, name: "Supermarket Purchase", date: "Nov 3, 4:20 PM", amount: "-₦8,700.00", type: "debit", icon: <ShoppingCart sx={{ color: "#A0153E" }} /> },
-  { id: 6, name: "Fuel Payment", date: "Nov 3, 9:00 AM", amount: "-₦6,300.00", type: "debit", icon: <DirectionsCar sx={{ color: "#5D0E41" }} /> },
-  { id: 7, name: "Internet Subscription", date: "Nov 2, 11:12 PM", amount: "-₦4,000.00", type: "debit", icon: <Wifi sx={{ color: "#A0153E" }} /> },
-  { id: 8, name: "Restaurant", date: "Nov 2, 7:20 PM", amount: "-₦5,500.00", type: "debit", icon: <Restaurant sx={{ color: "#FF204E" }} /> },
-  { id: 9, name: "Salary Credit", date: "Nov 1, 8:00 AM", amount: "+₦120,000.00", type: "credit", icon: <LocalAtm sx={{ color: "#00B894" }} /> },
-  { id: 10, name: "Utility Bill", date: "Oct 31, 6:50 PM", amount: "-₦10,000.00", type: "debit", icon: <AccountBalance sx={{ color: "#5D0E41" }} /> },
+  { id: 3, name: "Canopy Pos CAL Purchase", date: "Nov 5, 10:30 AM", amount: "-$2,000.00", type: "debit", icon: <PhoneAndroid sx={{ color: "#5D0E41" }} /> },
+  { id: 4, name: "Deposit from Bank", date: "Nov 4, 1:05 PM", amount: "+$60,220.00", type: "credit", icon: <AccountBalance sx={{ color: "#00224D" }} /> },
+  { id: 5, name: "IRS Due TPGS Purchase", date: "Nov 3, 4:20 PM", amount: "-$8,700.00", type: "debit", icon: <ShoppingCart sx={{ color: "#A0153E" }} /> },
+  { id: 6, name: "Car Payment", date: "Nov 3, 9:00 AM", amount: "-$6,300.00", type: "debit", icon: <DirectionsCar sx={{ color: "#5D0E41" }} /> },
+  { id: 7, name: "Insurance Policy", date: "Nov 2, 11:12 PM", amount: "-$4,000.00", type: "debit", icon: <Wifi sx={{ color: "#A0153E" }} /> },
+  { id: 8, name: "Internal (Bank) Lumina TRF", date: "Nov 2, 7:20 PM", amount: "-$50,500.00", type: "debit", icon: <Restaurant sx={{ color: "#FF204E" }} /> },
+  { id: 9, name: "Salary Credit", date: "Nov 1, 8:00 AM", amount: "+$120,000.00", type: "credit", icon: <LocalAtm sx={{ color: "#00B894" }} /> },
+  { id: 10, name: "Utility Bill", date: "Oct 31, 6:50 PM", amount: "-$1200.00", type: "debit", icon: <AccountBalance sx={{ color: "#5D0E41" }} /> },
 ];
 
 export default function RecentTable() {

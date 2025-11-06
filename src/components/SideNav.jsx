@@ -24,10 +24,10 @@ export default function SideNav({ onClose }) {
       <Box sx={{ px: 3, py: 3, borderBottom: "1px solid rgba(0,0,0,0.04)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <Box>
           <Typography variant="h6" sx={{ fontWeight: 700, color: "primary.main" }}>
-            Amber Bank
+            Lumina
           </Typography>
           <Typography variant="caption" sx={{ color: "text.secondary" }}>
-            Neon Dashboard
+            Dashboard
           </Typography>
         </Box>
 
