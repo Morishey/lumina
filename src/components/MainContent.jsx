@@ -67,7 +67,7 @@ export default function MainContent({ isDesktop }) {
                 variant="h6"
                 sx={{
                   fontWeight: 700,
-                  color: "#00224D",
+                  color: "#f9fafaff",
                 }}
               >
                 Overview
@@ -103,20 +103,20 @@ export default function MainContent({ isDesktop }) {
               {[
                 {
                   title: "Balance",
-                  value: "₦254,300.00",
+                  value: "$354,300.00",
                   subtitle: "Available balance",
                   trend: "+4.2%",
                 },
                 {
                   title: "Transactions",
-                  value: "72",
+                  value: "10",
                   subtitle: "This month",
                   trend: "-1.4%",
                 },
                 {
                   title: "Cards",
                   value: "2",
-                  subtitle: "Active cards",
+                  subtitle: "Active cards (0) CALL TO ACTIVATE CARDS",
                   trend: "+0.8%",
                 },
               ].map((card, index) => (
@@ -149,7 +149,7 @@ export default function MainContent({ isDesktop }) {
                 sx={{
                   mb: 1.5,
                   fontWeight: 700,
-                  color: "#00224D",
+                  color: "#f5f6f7ff",
                   ml: { xs: 1, md: 0 },
                 }}
               >
@@ -174,9 +174,9 @@ export default function MainContent({ isDesktop }) {
                 <Box sx={{ textAlign: "right", minWidth: 160 }}>
                   <Typography
                     variant="h6"
-                    sx={{ fontWeight: 800, color: "#FF204E" }}
+                    sx={{ fontWeight: 800, color: "#209e42ff" }}
                   >
-                    ₦14,200
+                    $32,200
                   </Typography>
                   <Typography
                     variant="caption"
@@ -204,7 +204,7 @@ export default function MainContent({ isDesktop }) {
           >
             <Typography
               variant="h6"
-              sx={{ fontWeight: 700, mb: 2, color: "#00224D" }}
+              sx={{ fontWeight: 700, mb: 2, color: "#fbfbfcff" }}
             >
               Quick Actions
             </Typography>
