@@ -1,21 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { ThemeProvider, createTheme, CssBaseline, Box } from "@mui/material";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
+import Login from "./pages/login";
 
 const theme = createTheme({
   palette: {
     mode: "dark",
-    primary: { main: "#FF204E" },    // neon primary
+    primary: { main: "#FF204E" },
     secondary: { main: "#A0153E" },
-    background: {
-      default: "#00224D",            // NAVY base
-      paper: "#5D0E41",              // MAGENTA paper tone
-    },
+    background: { default: "#00224D", paper: "#5D0E41" },
     text: { primary: "#FFFFFF", secondary: "rgba(255,255,255,0.75)" },
   },
-   typography: {
+  typography: {
     fontFamily: "'Inter', sans-serif",
-    fontSize: 9, // Default base font size (was 14 by default)
+    fontSize: 9,
     h6: { fontSize: "0.9rem", fontWeight: 700 },
     subtitle1: { fontSize: "0.8rem" },
     body1: { fontSize: "0.8rem" },
@@ -25,12 +24,41 @@ const theme = createTheme({
 });
 
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    localStorage.setItem("authToken", "123"); // simulate login
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken"); // clear token
+    setIsLoggedIn(false);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box sx={{ minHeight: "100vh", bgcolor: "background.default" }}>
-        <Dashboard />
-      </Box>
+      <BrowserRouter>
+        <Box sx={{ minHeight: "100vh", bgcolor: "background.default" }}>
+          <Routes>
+            {/* Login Page */}
+            <Route
+              path="/"
+              element={isLoggedIn ? <Navigate to="/dashboard" /> : <Login onLogin={handleLogin} />}
+            />
+
+            {/* Dashboard Page */}
+            <Route
+              path="/dashboard"
+              element={isLoggedIn ? <Dashboard onLogout={handleLogout} /> : <Navigate to="/" />}
+            />
+
+            {/* Catch all unknown routes */}
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </Box>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }
