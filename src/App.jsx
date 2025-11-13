@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ThemeProvider, createTheme, CssBaseline, Box } from "@mui/material";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
-import Login from "./pages/login";
+import Login from "./pages/Login";
 
 const theme = createTheme({
   palette: {
