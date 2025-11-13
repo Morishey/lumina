@@ -4,10 +4,8 @@ import {
   Toolbar,
   Box,
   IconButton,
-  InputBase,
   Avatar,
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MenuIcon from "@mui/icons-material/Menu";
 
@@ -22,8 +20,8 @@ export default function TopBar({ onToggleSidebar }) {
         px: { xs: 1, sm: 2, md: 3 },
       }}
     >
-      <Toolbar sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-        {/* Left: hamburger then logo */}
+      <Toolbar sx={{ display: "flex", alignItems: "center" }}>
+        {/* Left side: hamburger and logo */}
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
           <IconButton
             onClick={onToggleSidebar}
@@ -38,35 +36,15 @@ export default function TopBar({ onToggleSidebar }) {
             <MenuIcon />
           </IconButton>
 
-          <Box sx={{ fontWeight: 700, color: "primary.main", fontSize: 18 }}>
-            {/* logo text - change as needed */}
-            Lumina{" "}
+          <Box sx={{ fontWeight: 700, color: "primary.main", fontSize: 16 }}>
+            Lumina
           </Box>
         </Box>
 
-        {/* Center: search - this will be centered due to flex:1 and justifyCenter */}
-        <Box sx={{ flex: 1, display: "flex", justifyContent: "center" }}>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              bgcolor: "rgba(0,0,0,0.04)",
-              px: 1,
-              py: 0.4,
-              borderRadius: 2,
-              width: { xs: "85%", sm: "65%", md: "50%" },
-              maxWidth: 640,
-            }}
-          >
-            <SearchIcon sx={{ color: "text.secondary", mr: 1 }} />
-            <InputBase
-              placeholder="Search transactions, accounts..."
-              sx={{ color: "text.primary", width: "100%" }}
-            />
-          </Box>
-        </Box>
+        {/* Spacer to push right side content to the right */}
+        <Box sx={{ flexGrow: 1 }} />
 
-        {/* Right: notifications + avatar */}
+        {/* Right side: notifications and avatar */}
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
           <IconButton sx={{ color: "text.primary" }}>
             <NotificationsIcon />

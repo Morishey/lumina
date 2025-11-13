@@ -92,54 +92,62 @@ export default function MainContent({ isDesktop }) {
               </Button>
             </Box>
 
-            {/* Stat cards - Stack on mobile */}
-            <Grid
-              container
-              spacing={2}
-              sx={{
-                flexDirection: { xs: "column", sm: "column", md: "row" },
-              }}
-            >
-              {[
-                {
-                  title: "Balance",
-                  value: "$354,300.00",
-                  subtitle: "Available balance",
-                  trend: "+4.2%",
-                },
-                {
-                  title: "Transactions",
-                  value: "10",
-                  subtitle: "This month",
-                  trend: "-1.4%",
-                },
-                {
-                  title: "Cards",
-                  value: "2",
-                  subtitle: "Active cards (0) CALL TO ACTIVATE CARDS",
-                  trend: "+0.8%",
-                },
-              ].map((card, index) => (
-                <Grid
-                  key={index}
-                  item
-                  xs={12}
-                  md={4}
-                  sx={{
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      width: { xs: "100%", sm: "100%", md: "100%" },
-                    }}
+            {/* Stat cards separated */}
+            <Grid container spacing={2} sx={{ flexDirection: { xs: "column", md: "row" } }}>
+              {/* Balance card */}
+              <Grid item xs={12} md={4} sx={{ display: "flex", justifyContent: "center" }}>
+                <Box sx={{ width: "100%" }}>
+                  <StatCard
+                    title="Balance"
+                    value="$854,300.00"
+                    subtitle="Available balance"
+                    trend="+4.2%"
+                  />
+                </Box>
+              </Grid>
+
+              {/* Spacer */}
+              <Grid item md={1} sx={{ display: { xs: "none", md: "block" } }} />
+
+              {/* Transactions and Cards grouped */}
+              <Grid
+                item
+                xs={12}
+                md={7}
+                container
+                spacing={2}
+                sx={{
+                  flexDirection: { xs: "column", md: "row" },
+                  justifyContent: "center",
+                }}
+              >
+                {[
+                  {
+                    title: "Transactions",
+                    value: "10",
+                    subtitle: "This month",
+                    trend: "-1.4%",
+                  },
+                  {
+                    title: "Cards",
+                    value: "2",
+                    subtitle: "Active cards (0) CALL TO ACTIVATE CARDS",
+                    trend: "+0.8%",
+                  },
+                ].map((card, index) => (
+                  <Grid
+                    key={index}
+                    item
+                    xs={12}
+                    md={6}
+                    sx={{ display: "flex", justifyContent: "center" }}
                   >
-                    <StatCard {...card} />
-                  </Box>
-                </Grid>
-              ))}
+                    <Box sx={{ width: "100%" }}>
+                      <StatCard {...card} />
+                    </Box>
+                  </Grid>
+                ))}
+              </Grid>
             </Grid>
 
             {/* Performance section */}

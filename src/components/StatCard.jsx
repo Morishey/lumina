@@ -6,6 +6,10 @@ import TrendingDownIcon from "@mui/icons-material/TrendingDown";
 export default function StatCard({ title, value, subtitle, trend }) {
   const isPositive = trend?.includes("+");
 
+  // Split value into $ sign and the rest if it starts with $
+  const dollarSign = value.startsWith("$") ? "$" : null;
+  const amount = dollarSign ? value.slice(1) : value;
+
   return (
     <Paper
       elevation={0}
@@ -43,11 +47,35 @@ export default function StatCard({ title, value, subtitle, trend }) {
           fontWeight: 800,
           color: "#00224D",
           mb: 0.5,
-          fontSize: { xs: "1.1rem", sm: "1.3rem" },
           wordBreak: "break-word",
+          display: "flex",
+          alignItems: "center",
+          gap: 0.3,
         }}
       >
-        {value}
+        {dollarSign && (
+          <Box
+            component="span"
+            sx={{
+              fontSize: { xs: "1rem", sm: "0.9rem" }, // smaller dollar sign
+              fontWeight: 700,
+              color: "#00224D",
+            }}
+          >
+            {dollarSign}
+          </Box>
+        )}
+        <Box
+          component="span"
+          sx={{
+            fontSize: title === "Balance" ? { xs: "1.8rem", sm: "1.6rem" } : { xs: "1.1rem", sm: "1.3rem" },
+            fontWeight: 800,
+            lineHeight: 1,
+            color: "#00224D",
+          }}
+        >
+          {amount}
+        </Box>
       </Typography>
 
       <Typography
